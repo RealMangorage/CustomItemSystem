@@ -2,3 +2,7 @@ name: CustomItem
 version: '${version}'
 main: org.mangorage.customitem.CustomItem
 api-version: '1.20'
+commands:
+  givecustom:
+    description: Your custom command description.
+    usage: /givecustom
