@@ -1,0 +1,4 @@
+name: CustomItem
+version: '${version}'
+main: org.mangorage.customitem.CustomItem
+api-version: '1.20'
