@@ -8,10 +8,12 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
 import org.mangorage.customitem.core.CustomItem;
+import org.mangorage.customitem.registry.Items;
 
 public class TestItem extends CustomItem {
-    public TestItem(String ID) {
-        super(ID);
+
+    public TestItem() {
+        super(Items.CUSTOM_ITEM);
     }
 
     @Override

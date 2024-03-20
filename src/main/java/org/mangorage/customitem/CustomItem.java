@@ -2,15 +2,9 @@ package org.mangorage.customitem;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import org.mangorage.customitem.core.GiveCustomItemCommand;
-import org.mangorage.customitem.core.ItemRegistry;
-import org.mangorage.customitem.items.TestItem;
+import org.mangorage.customitem.registry.Items;
 
 public final class CustomItem extends JavaPlugin {
-    private static ItemRegistry ITEMS = ItemRegistry.getRegistry();
-
-    static {
-        ITEMS.registerItem("test", TestItem::new);
-    }
 
     @Override
     public void onEnable() {
@@ -23,7 +17,7 @@ public final class CustomItem extends JavaPlugin {
             cmd.setTabCompleter(GCI);
         }
 
-        ITEMS.register(this);
+        Items.register(this);
     }
 
     @Override
