@@ -1,13 +1,12 @@
 package org.mangorage.customitem.core;
 
-import org.bukkit.event.Event;
+import de.tr7zw.nbtapi.iface.ReadWriteItemNBT;
+import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
-import org.mangorage.customitem.core.pdc.NBTPDC;
 
 import java.util.function.Supplier;
 
-public abstract class CustomItem {
-    public static final String NAMESPACE_ID = "customitem";
+public abstract class CustomItem implements Listener {
     private final Supplier<RegistryObject<? extends CustomItem>> RO;
 
     public CustomItem(Supplier<RegistryObject<? extends CustomItem>> RO) {
@@ -18,13 +17,16 @@ public abstract class CustomItem {
         return RO.get().getID();
     }
 
-    public void setID(NBTPDC PDC) {
-        var extra = PDC.createNewPDC();
-        extra.putString("id", getID());
-        PDC.putCompound("extradata", extra);
+    public void setID(ReadWriteItemNBT tag) {
+        var extra = tag.getOrCreateCompound(Constants.EXTRA_DATA_TAG);
+        extra.setString("id", getID());
     }
-    abstract public ItemStack create();
 
-    abstract public void onEvent(Event event, ItemStack itemStack);
+    public boolean isSame(ItemStack stack) {
+        if (stack == null || stack.isEmpty() || stack.getAmount() <= 0) return false;
+        return getID().equals(Utils.getID(stack));
+    }
+
+    abstract public ItemStack create();
 
 }

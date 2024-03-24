@@ -1,5 +1,7 @@
 package org.mangorage.customitem.core;
 
+import de.tr7zw.nbtapi.NBT;
+import de.tr7zw.nbtapi.NBTType;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -60,6 +62,18 @@ public class Utils {
         }
 
         // If no suitable location is found within the maximum distance, return null
+        return null;
+    }
+
+    public static String getID(ItemStack stack) {
+        var nbt = NBT.readNbt(stack);
+
+        if (nbt.hasTag(Constants.EXTRA_DATA_TAG, NBTType.NBTTagCompound)) {
+            var extraData = nbt.getCompound(Constants.EXTRA_DATA_TAG);
+            if (extraData != null && extraData.hasTag("id", NBTType.NBTTagString))
+                return extraData.getString("id");
+        }
+
         return null;
     }
 }
